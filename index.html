@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SahabatCare - platform dukungan psikologis yang aksesibel untuk atlet difabel.">
+  <title>SahabatCare — Dukungan Psikologis Atlet Difabel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Lewati ke konten utama</a>
+
+  <header class="topbar">
+    <a class="brand" href="#home" data-nav="home" aria-label="SahabatCare beranda">
+      <span class="brand-mark" aria-hidden="true">SC</span>
+      <span>Sahabat<span>Care</span></span>
+    </a>
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <button class="nav-link active" data-nav="home">Beranda</button>
+      <button class="nav-link" data-nav="ai">SahabatAI</button>
+      <button class="nav-link" data-nav="wellbeing">Well-being</button>
+      <button class="nav-link" data-nav="care">Konsultasi</button>
+      <button class="nav-link" data-nav="profile">Profil</button>
+    </nav>
+    <button class="icon-btn" id="accessBtn" title="Pengaturan aksesibilitas" aria-label="Buka pengaturan aksesibilitas">Aa</button>
+  </header>
+
+  <main id="main-content">
+    <section class="page active" id="home">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">MENTAL HEALTH • SPORT • ACCESSIBILITY</span>
+          <h1>Ruang aman untuk<br><span>atlet yang terus bergerak.</span></h1>
+          <p>SahabatCare membantu atlet difabel menjaga well-being, memahami tekanan olahraga, dan terhubung dengan dukungan profesional secara lebih aksesibel.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary" data-nav="ai">Mulai ngobrol dengan SahabatAI <span>→</span></button>
+            <button class="btn btn-soft" data-nav="care">Cari psikolog</button>
+          </div>
+          <div class="trust-row">
+            <span>✓ AI bukan pengganti psikolog</span>
+            <span>✓ Data dikendalikan atlet</span>
+            <span>✓ Dibangun dengan aksesibilitas</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Ilustrasi atlet dan dukungan">
+          <div class="orb orb-one"></div><div class="orb orb-two"></div>
+          <div class="athlete-card">
+            <div class="athlete-icon">🏃‍♂️</div>
+            <div>
+              <strong>Hari ini, kamu bagaimana?</strong>
+              <small>Check-in singkat • 1 menit</small>
+            </div>
+            <button class="mini-go" data-nav="wellbeing" aria-label="Mulai check-in">→</button>
+          </div>
+          <div class="floating-card floating-top"><b>AI</b><span>Dengar dulu,<br>bukan menghakimi.</span></div>
+          <div class="floating-card floating-bottom"><b>24/7</b><span>Akses kapan<br>kamu butuh.</span></div>
+        </div>
+      </div>
+
+      <div class="section-heading">
+        <div><span class="eyebrow">KENAPA SAHABATCARE?</span><h2>Dirancang untuk kebutuhan atlet difabel</h2></div>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><div class="feature-icon purple">✦</div><h3>SahabatAI</h3><p>Teman pertama untuk check-in dan menemukan langkah dukungan yang sesuai.</p></article>
+        <article class="feature-card"><div class="feature-icon teal">♡</div><h3>Psikolog</h3><p>Hubungkan percakapan dengan profesional ketika kamu membutuhkan dukungan lebih lanjut.</p></article>
+        <article class="feature-card"><div class="feature-icon orange">◎</div><h3>Aksesibel</h3><p>Ukuran teks, kontras, voice support, dan pilihan komunikasi dapat disesuaikan.</p></article>
+        <article class="feature-card"><div class="feature-icon blue">▣</div><h3>Kontrol data</h3><p>Riwayat dan informasi pribadi tidak otomatis dibagikan kepada tim atau pelatih.</p></article>
+      </div>
+    </section>
+
+    <section class="page" id="ai">
+      <div class="page-title"><div><span class="eyebrow">SAHABATAI</span><h1>Ngobrol tanpa harus mulai dari nol.</h1><p>Pilih hal yang paling dekat dengan keadaanmu. Kamu juga bisa mengetik sendiri.</p></div><span class="status"><i></i> Demo aktif</span></div>
+      <div class="ai-layout">
+        <aside class="quick-panel">
+          <h3>Yang sedang kamu rasakan?</h3>
+          <div class="quick-list" id="quickList">
+            <button data-prompt="Aku sedang cemas menghadapi pertandingan.">😟 Cemas sebelum pertandingan</button>
+            <button data-prompt="Aku sedang kehilangan motivasi untuk latihan.">🔋 Motivasi latihan menurun</button>
+            <button data-prompt="Aku merasa tertekan dengan performaku.">📉 Performa terasa menurun</button>
+            <button data-prompt="Aku khawatir dengan cedera dan proses recovery.">🩹 Cedera & recovery</button>
+            <button data-prompt="Aku takut mengalami cedera lagi saat kembali bertanding.">↩️ Takut kembali cedera</button>
+            <button data-prompt="Aku kesulitan mendapatkan fasilitas latihan yang aksesibel.">♿ Fasilitas latihan kurang aksesibel</button>
+            <button data-prompt="Aku merasa pelatih atau tim kurang memahami kebutuhanku.">🤝 Dukungan tim/pelatih</button>
+            <button data-prompt="Aku merasa tertinggal karena keterbatasan akses saat latihan.">🚧 Hambatan akses saat latihan</button>
+            <button data-prompt="Aku merasa sedih dan butuh tempat untuk bercerita.">💬 Butuh tempat bercerita</button>
+            <button data-prompt="Aku bingung dengan masa depan setelah karier olahraga.">🧭 Cemas soal karier</button>
+            <button data-prompt="Aku lelah secara mental setelah kompetisi.">🌙 Lelah setelah kompetisi</button>
+            <button data-prompt="Aku ingin bicara dengan psikolog.">👩‍⚕️ Ingin bicara dengan psikolog</button>
+          </div>
+        </aside>
+        <div class="chat-card">
+          <div class="chat-head"><div class="avatar ai-avatar">✦</div><div><strong>SahabatAI</strong><small>Teman check-in • bukan pengganti psikolog</small></div><button id="clearChat" class="text-btn">Bersihkan</button></div>
+          <div class="chat-messages" id="chatMessages" aria-live="polite">
+            <div class="message bot"><div class="bubble">Hai! Aku SahabatAI. Kamu tidak harus punya kata-kata yang sempurna untuk mulai cerita. Pilih salah satu topik di samping atau tulis apa yang sedang kamu alami.</div><span>Baru saja</span></div>
+          </div>
+          <div class="chat-input">
+            <input id="chatInput" type="text" placeholder="Contoh: aku cemas karena pertandingan besok..." aria-label="Tulis pesan">
+            <button id="sendChat" class="send-btn" aria-label="Kirim pesan">↑</button>
+          </div>
+          <div class="chat-note">SahabatAI memberikan dukungan awal. Untuk kondisi yang membutuhkan penanganan profesional, gunakan <button id="chatCareLink">Konsultasi psikolog</button>.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="wellbeing">
+      <div class="page-title"><div><span class="eyebrow">WELL-BEING</span><h1>Kenali pola, bukan untuk menghakimi diri.</h1><p>Check-in sederhana ini membantu kamu melihat kondisi hari ini. Hasilnya bukan diagnosis.</p></div></div>
+      <div class="wellbeing-grid">
+        <div class="checkin-card">
+          <div class="progress-line"><span id="stepLabel">Langkah 1 dari 4</span><span id="progressPct">25%</span></div>
+          <div class="progress-bar"><i id="progressBar"></i></div>
+          <div id="checkinContent">
+            <span class="question-tag">MOOD</span><h2>Bagaimana suasana hatimu hari ini?</h2>
+            <div class="choice-grid" data-step="0">
+              <button data-value="1">😞 Sangat berat</button><button data-value="2">😕 Kurang baik</button><button data-value="3">🙂 Cukup baik</button><button data-value="4">😊 Baik</button><button data-value="5">✨ Sangat baik</button>
+            </div>
+          </div>
+        </div>
+        <aside class="insight-card"><span class="eyebrow">CATATAN</span><h3>Well-being ≠ performa</h3><p>Kondisi mental bisa berubah dari hari ke hari. Check-in bukan alat untuk menilai apakah kamu “cukup kuat”, melainkan kesempatan untuk mengenali kebutuhanmu.</p><div class="insight-tip">💡 <b>Tips:</b> Jawab sesuai keadaanmu sekarang, bukan sesuai harapan orang lain.</div></aside>
+      </div>
+      <div class="history-card"><div><span class="eyebrow">RIWAYAT</span><h2>Check-in terakhir</h2></div><div id="historyList" class="history-list"><p class="empty-state">Belum ada check-in tersimpan. Coba lakukan satu sekarang.</p></div></div>
+    </section>
+
+    <section class="page" id="care">
+      <div class="page-title"><div><span class="eyebrow">PROFESSIONAL CARE</span><h1>Ketika kamu ingin didengar oleh profesional.</h1><p>Pilih cara komunikasi yang paling nyaman. Ini adalah simulasi prototipe.</p></div></div>
+      <div class="care-banner"><div><strong>Butuh bantuan yang lebih personal?</strong><span>SahabatCare mengutamakan manusia. SahabatAI hanya membantu sebagai pintu masuk.</span></div><button class="btn btn-primary" data-consult="chat">Mulai konsultasi</button></div>
+      <div class="psych-grid">
+        <article class="psych-card"><div class="psych-top"><div class="psych-avatar">DR</div><div><h3>dr. Rania Putri, M.Psi.</h3><span>Psikolog olahraga</span></div><b class="online">● Online</b></div><p>Fokus pada kecemasan kompetisi, performa, recovery, dan adaptasi atlet.</p><div class="tag-row"><span>Atlet difabel</span><span>Recovery</span><span>Performance</span></div><div class="consult-options"><button data-consult="chat">Chat</button><button data-consult="voice">Voice call</button><button data-consult="video">Video call</button></div></article>
+        <article class="psych-card"><div class="psych-top"><div class="psych-avatar alt">NA</div><div><h3>Ns. Nadia Arum, M.Psi.</h3><span>Psikolog klinis</span></div><b class="online">● Online</b></div><p>Mendampingi stres, perubahan emosi, kelelahan mental, dan transisi karier atlet.</p><div class="tag-row"><span>Stres</span><span>Career transition</span><span>Well-being</span></div><div class="consult-options"><button data-consult="chat">Chat</button><button data-consult="voice">Voice call</button><button data-consult="video">Video call</button></div></article>
+      </div>
+    </section>
+
+    <section class="page" id="profile">
+      <div class="page-title"><div><span class="eyebrow">PROFIL & PRIVASI</span><h1>Atur pengalamanmu sendiri.</h1><p>Pengaturan di bawah langsung tersimpan di browser perangkat ini.</p></div></div>
+      <div class="profile-grid">
+        <div class="settings-card">
+          <h2>Aksesibilitas</h2>
+          <label class="setting"><span><b>Ukuran teks besar</b><small>Perbesar tulisan di seluruh aplikasi</small></span><input type="checkbox" id="largeText"><i></i></label>
+          <label class="setting"><span><b>Kontras tinggi</b><small>Meningkatkan perbedaan warna teks dan latar</small></span><input type="checkbox" id="highContrast"><i></i></label>
+          <label class="setting"><span><b>Gerakan minimal</b><small>Mengurangi animasi antarmuka</small></span><input type="checkbox" id="reducedMotion"><i></i></label>
+        </div>
+        <div class="settings-card">
+          <h2>Kontrol data</h2>
+          <div class="privacy-box"><span>🔒</span><div><b>Data demo tersimpan lokal</b><p>Check-in dan pengaturan prototipe ini hanya disimpan menggunakan localStorage browser. Tidak dikirim ke server.</p></div></div>
+          <button id="clearData" class="btn btn-danger">Hapus data lokal</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <button class="urgent-btn" id="urgentBtn">⚠ Bantuan segera</button>
+
+  <div class="modal" id="accessModal" role="dialog" aria-modal="true" aria-labelledby="accessTitle">
+    <div class="modal-box"><button class="modal-close" data-close="accessModal">×</button><span class="eyebrow">ACCESSIBILITY CENTER</span><h2 id="accessTitle">Sesuaikan pengalamanmu</h2><p>Semua pengaturan ini bisa diubah kapan saja.</p>
+      <div class="modal-settings"><button data-setting="largeText">Aa &nbsp; Ukuran teks besar</button><button data-setting="highContrast">◐ &nbsp; Kontras tinggi</button><button data-setting="reducedMotion">◌ &nbsp; Gerakan minimal</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="consultModal" role="dialog" aria-modal="true" aria-labelledby="consultTitle">
+    <div class="modal-box consult-modal"><button class="modal-close" data-close="consultModal">×</button><div class="modal-icon">♡</div><span class="eyebrow">KONSULTASI</span><h2 id="consultTitle">Pilih cara yang nyaman untukmu</h2><p id="consultText">Ini simulasi alur konsultasi SahabatCare. Tidak ada panggilan nyata yang dilakukan.</p>
+      <div class="consult-choice"><button data-demo="Chat">💬 <b>Chat</b><small>Mulai percakapan teks</small></button><button data-demo="Voice call">🎙 <b>Voice call</b><small>Simulasi panggilan suara</small></button><button data-demo="Video call">📹 <b>Video call</b><small>Video + live caption</small></button></div>
+      <div id="consultSuccess" class="success-message" hidden>✓ Sesi simulasi siap. Untuk prototype, kamu bisa melanjutkan dengan tombol di bawah.</div>
+      <button id="consultDone" class="btn btn-primary full" hidden>Tutup</button>
+    </div>
+  </div>
+
+  <div class="modal" id="urgentModal" role="dialog" aria-modal="true" aria-labelledby="urgentTitle">
+    <div class="modal-box urgent-modal"><button class="modal-close" data-close="urgentModal">×</button><div class="urgent-symbol">!</div><span class="eyebrow">BANTUAN SEGERA</span><h2 id="urgentTitle">Kalau kamu merasa tidak aman</h2><p>SahabatAI bukan layanan darurat dan tidak dapat menangani kondisi krisis sendiri. Jika ada bahaya atau kamu merasa tidak aman, segera hubungi orang yang kamu percaya atau layanan darurat setempat.</p><div class="urgent-actions"><button class="btn btn-primary" id="closeUrgent">Saya mengerti</button><button class="btn btn-soft" data-nav="care">Cari dukungan profesional</button></div></div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script src="script.js"></script>
+</body>
+</html>
