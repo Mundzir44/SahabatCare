@@ -67,30 +67,76 @@ $("#sendChat").addEventListener("click",sendChat);$("#chatInput").addEventListen
 $$("[data-prompt]").forEach(b=>b.addEventListener("click",()=>{const t=b.dataset.prompt;addMessage(t,"user");setTimeout(()=>addMessage(makeReply(t),"bot"),350)}));
 $("#clearChat").addEventListener("click",()=>{$("#chatMessages").innerHTML='<div class="message bot"><div class="bubble">Percakapan dibersihkan. Kamu bisa mulai lagi kapan saja.</div><span>Baru saja</span></div>';toast("Percakapan dibersihkan")});
 
-const questions=[
- ["MOOD","Bagaimana suasana hatimu hari ini?",["😞 Sangat berat","😕 Kurang baik","🙂 Cukup baik","😊 Baik","✨ Sangat baik"]],
- ["STRES","Seberapa berat tekanan yang kamu rasakan hari ini?",["😌 Ringan","🙂 Cukup ringan","😐 Sedang","😟 Berat","🫠 Sangat berat"]],
- ["TIDUR","Bagaimana kualitas tidurmu terakhir kali?",["😴 Sangat buruk","😕 Kurang","🙂 Cukup","😊 Baik","✨ Sangat baik"]],
- ["RECOVERY","Bagaimana kondisi recovery dan beban latihanmu?",["🫶 Sangat ringan","🙂 Terkelola","😐 Cukup berat","😟 Berat","🛑 Sangat berat"]]
+const phqQuestions=[
+  ["DEPRESI","Dalam 2 minggu terakhir, seberapa sering kamu kehilangan minat atau kesenangan pada aktivitas?"],
+  ["DEPRESI","Dalam 2 minggu terakhir, seberapa sering kamu merasa sedih atau kehilangan harapan?"],
+  ["KECEMASAN","Dalam 2 minggu terakhir, seberapa sering kamu merasa gugup, cemas, atau tegang?"],
+  ["KECEMASAN","Dalam 2 minggu terakhir, seberapa sering kamu sulit mengendalikan kekhawatiran?"]
 ];
-let checkStep=0,answers=[];
+const phqOptions=["Tidak sama sekali","Beberapa hari","Lebih dari setengah hari","Hampir setiap hari"];
+let checkStep=0,answers=[],safetyFlag=false;
+
 function renderCheck(){
-  const q=questions[checkStep],box=$("#checkinContent");
-  $("#stepLabel").textContent="Langkah "+(checkStep+1)+" dari "+questions.length;$("#progressPct").textContent=Math.round((checkStep+1)/questions.length*100)+"%";$("#progressBar").style.width=((checkStep+1)/questions.length*100)+"%";
-  box.innerHTML='<span class="question-tag">'+q[0]+'</span><h2>'+q[1]+'</h2><div class="choice-grid">'+q[2].map((x,i)=>'<button data-choice="'+(i+1)+'">'+x+'</button>').join("")+"</div>";
-  $$(".choice-grid button",box).forEach(b=>b.addEventListener("click",()=>{answers.push(Number(b.dataset.choice));if(checkStep<questions.length-1){checkStep++;renderCheck()}else{finishCheck()}}));
+  const q=phqQuestions[checkStep],box=$("#checkinContent");
+  $("#stepLabel").textContent="PHQ-4 • Pertanyaan "+(checkStep+1)+" dari 4";
+  $("#progressPct").textContent=Math.round((checkStep+1)/4*100)+"%";
+  $("#progressBar").style.width=((checkStep+1)/4*100)+"%";
+  box.innerHTML='<span class="question-tag">'+q[0]+'</span><h2>'+q[1]+'</h2><p class="question-help">Pilih jawaban yang paling sesuai dengan keadaanmu selama 2 minggu terakhir.</p><div class="choice-grid">'+phqOptions.map((x,i)=>'<button data-choice="'+i+'">'+x+'</button>').join("")+'</div>';
+  $$(".choice-grid button",box).forEach(btn=>btn.addEventListener("click",()=>{
+    answers.push(Number(btn.dataset.choice));
+    if(checkStep<phqQuestions.length-1){checkStep++;renderCheck()}else{renderSafetyCheck()}
+  }));
 }
+
+function renderSafetyCheck(){
+  $("#stepLabel").textContent="PHQ-4 • Pemeriksaan keselamatan";
+  $("#progressPct").textContent="100%";
+  $("#progressBar").style.width="100%";
+  $("#checkinContent").innerHTML='<span class="question-tag">SAFETY CHECK</span><h2>Apakah ada kondisi saat ini yang membuatmu merasa tidak aman atau membutuhkan bantuan segera?</h2><p class="question-help">Pertanyaan ini membantu menentukan apakah jalur dukungan perlu segera dialihkan ke bantuan profesional.</p><div class="choice-grid"><button data-safety="no">Tidak</button><button data-safety="yes">Ya, saya butuh bantuan</button></div>';
+  $$("#checkinContent [data-safety]").forEach(btn=>btn.addEventListener("click",()=>{
+    safetyFlag=btn.dataset.safety==="yes";
+    finishCheck();
+  }));
+}
+
+function getRisk(score,safety){
+  if(safety || score>=9) return {
+    key:"high",label:"Risiko tinggi",title:"Diperlukan dukungan profesional segera",
+    text:"Hasil screening menunjukkan perlunya eskalasi ke tenaga profesional sesuai protokol keselamatan. SahabatAI tidak menjadi intervensi utama pada jalur ini."
+  };
+  if(score>=3) return {
+    key:"medium",label:"Risiko sedang",title:"Perlu perhatian lebih lanjut",
+    text:"Hasil screening menunjukkan adanya gejala yang perlu diperhatikan. SahabatCare merekomendasikan konsultasi dengan psikolog/psikiater dan monitoring berkelanjutan."
+  };
+  return {
+    key:"low",label:"Risiko rendah",title:"Lanjutkan monitoring",
+    text:"Hasil screening tidak menunjukkan gejala bermakna pada PHQ-4 dan tidak ada indikator keselamatan yang dipilih. SahabatCare menyediakan psikoedukasi, latihan relaksasi, jurnal, dan monitoring rutin."
+  };
+}
+
 function finishCheck(){
-  const avg=answers.reduce((a,b)=>a+b,0)/answers.length;
-  const label=avg>=4?"Kondisi relatif baik":avg>=3?"Perlu perhatian ringan":"Perlu lebih banyak dukungan";
-  const date=new Date().toLocaleDateString("id-ID",{day:"numeric",month:"short"});
-  state.checkins.unshift({date,avg:Number(avg.toFixed(1)),label});state.checkins=state.checkins.slice(0,5);save();
-  $("#checkinContent").innerHTML='<div class="success-message" style="margin-top:30px">✓ Check-in tersimpan</div><h2>'+label+'</h2><p style="color:var(--muted)">Terima kasih sudah meluangkan waktu untuk mengecek keadaanmu. Hasil ini bukan diagnosis. Jika kamu merasa membutuhkan dukungan lebih lanjut, kamu bisa berbicara dengan profesional.</p><div class="hero-actions"><button class="btn btn-primary" id="againCheck">Check-in lagi</button><button class="btn btn-soft" data-nav="care">Konsultasi psikolog</button></div>';
-  $("#againCheck").addEventListener("click",()=>{checkStep=0;answers=[];renderCheck()});
-  $$("[data-nav]",$("#checkinContent")).forEach(b=>b.addEventListener("click",()=>navigate(b.dataset.nav)));
-  renderHistory();toast("Check-in berhasil disimpan");
+  const score=answers.reduce((a,b)=>a+b,0);
+  const risk=getRisk(score,safetyFlag);
+  const date=new Date().toLocaleDateString("id-ID",{day:"numeric",month:"short",year:"numeric"});
+  state.checkins.unshift({date,score,risk:risk.key,safety:safetyFlag});
+  state.checkins=state.checkins.slice(0,8);save();
+  const action=safetyFlag||risk.key==="high"
+    ? '<button class="btn btn-primary" data-nav="care">Hubungi profesional</button><button class="btn btn-soft" id="againCheck">Ulangi screening</button>'
+    : risk.key==="medium"
+      ? '<button class="btn btn-primary" data-nav="care">Konsultasi psikolog</button><button class="btn btn-soft" id="againCheck">Ulangi screening</button>'
+      : '<button class="btn btn-primary" id="againCheck">Monitoring lagi nanti</button><button class="btn btn-soft" data-nav="ai">Buka SahabatAI</button>';
+  $("#checkinContent").innerHTML='<div class="result-card '+risk.key+'"><div class="result-top"><span class="risk-dot '+risk.key+'"></span><b>'+risk.label+'</b><span class="result-score">PHQ-4 '+score+'/12</span></div><h2>'+risk.title+'</h2><p>'+risk.text+'</p></div><p class="screening-note">PHQ-4 adalah alat skrining, bukan diagnosis. Hasil perlu dipahami dalam konteks kondisi individu dan, bila diperlukan, dikonfirmasi oleh tenaga profesional.</p><div class="hero-actions">'+action+'</div>';
+  $("#againCheck").addEventListener("click",()=>{checkStep=0;answers=[];safetyFlag=false;renderCheck()});
+  $$("[data-nav]",$("#checkinContent")).forEach(btn=>btn.addEventListener("click",()=>navigate(btn.dataset.nav)));
+  renderHistory();toast("PHQ-4 berhasil disimpan");
 }
-function renderHistory(){const el=$("#historyList");el.innerHTML=state.checkins.length?state.checkins.map(x=>'<div class="history-item"><span><b>'+x.date+'</b><br><small style="color:var(--muted)">'+x.label+'</small></span><span class="score-pill">'+x.avg+'/5</span></div>').join(""):'<p class="empty-state">Belum ada check-in tersimpan.</p>'}
+
+function renderHistory(){
+  const el=$("#historyList");
+  el.innerHTML=state.checkins.length
+    ? state.checkins.map(x=>'<div class="history-item"><span><b>'+x.date+'</b><br><small style="color:var(--muted)">'+x.risk+(x.safety?' • indikator keselamatan':'')+'</small></span><span class="score-pill">PHQ-4 '+x.score+'/12</span></div>').join("")
+    : '<p class="empty-state">Belum ada screening tersimpan. Lakukan PHQ-4 untuk memulai monitoring.</p>';
+}
 renderCheck();renderHistory();
 
 $$("[data-consult]").forEach(b=>b.addEventListener("click",()=>{const type=b.dataset.consult;$("#consultTitle").textContent=type==="video"?"Video consultation":type==="voice"?"Voice consultation":"Chat consultation";$("#consultText").textContent="Pilih metode yang nyaman. Ini hanya simulasi interaksi untuk prototype SahabatCare.";$("#consultSuccess").hidden=true;$("#consultDone").hidden=true;openModal("consultModal")}));
