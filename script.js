@@ -68,10 +68,10 @@ $$("[data-prompt]").forEach(b=>b.addEventListener("click",()=>{const t=b.dataset
 $("#clearChat").addEventListener("click",()=>{$("#chatMessages").innerHTML='<div class="message bot"><div class="bubble">Percakapan dibersihkan. Kamu bisa mulai lagi kapan saja.</div><span>Baru saja</span></div>';toast("Percakapan dibersihkan")});
 
 const phqQuestions=[
-  ["DEPRESI","Dalam 2 minggu terakhir, seberapa sering kamu kehilangan minat atau kesenangan pada aktivitas?"],
-  ["DEPRESI","Dalam 2 minggu terakhir, seberapa sering kamu merasa sedih atau kehilangan harapan?"],
-  ["KECEMASAN","Dalam 2 minggu terakhir, seberapa sering kamu merasa gugup, cemas, atau tegang?"],
-  ["KECEMASAN","Dalam 2 minggu terakhir, seberapa sering kamu sulit mengendalikan kekhawatiran?"]
+  ["DEPRESI","Merasa gugup, cemas, atau gelisah"],
+  ["DEPRESI","Tidak mampu menghentikan atau mengendalikan rasa khawatir"],
+  ["KECEMASAN","Kurang berminat atau bergairah dalam melakukan sesuatu"],
+  ["KECEMASAN","Merasa murung, tertekan, atau putus asa"]
 ];
 const phqOptions=["Tidak sama sekali","Beberapa hari","Lebih dari setengah hari","Hampir setiap hari"];
 let checkStep=0,answers=[],safetyFlag=false;
