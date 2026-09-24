@@ -36,7 +36,7 @@
           <h1>Ruang aman untuk<br><span>atlet yang terus bergerak.</span></h1>
           <p>SahabatCare membantu atlet difabel menjaga well-being, memahami tekanan olahraga, dan terhubung dengan dukungan profesional secara lebih aksesibel.</p>
           <div class="hero-actions">
-            <button class="btn btn-primary" data-nav="ai">Mulai ngobrol dengan SahabatAI <span>→</span></button>
+            <button class="btn btn-primary" data-nav="wellbeing">Mulai PHQ-4 <span>→</span></button>
             <button class="btn btn-soft" data-nav="care">Cari psikolog</button>
           </div>
           <div class="trust-row">
@@ -51,7 +51,7 @@
             <div class="athlete-icon">🏃‍♂️</div>
             <div>
               <strong>Hari ini, kamu bagaimana?</strong>
-              <small>Check-in singkat • 1 menit</small>
+              <small>Screening PHQ-4 • 2 menit</small>
             </div>
             <button class="mini-go" data-nav="wellbeing" aria-label="Mulai check-in">→</button>
           </div>
@@ -64,8 +64,8 @@
         <div><span class="eyebrow">KENAPA SAHABATCARE?</span><h2>Dirancang untuk kebutuhan atlet difabel</h2></div>
       </div>
       <div class="feature-grid">
-        <article class="feature-card"><div class="feature-icon purple">✦</div><h3>SahabatAI</h3><p>Teman pertama untuk check-in dan menemukan langkah dukungan yang sesuai.</p></article>
-        <article class="feature-card"><div class="feature-icon teal">♡</div><h3>Psikolog</h3><p>Hubungkan percakapan dengan profesional ketika kamu membutuhkan dukungan lebih lanjut.</p></article>
+        <article class="feature-card"><div class="feature-icon purple">✦</div><h3>SahabatAI</h3><p>Membantu memahami hasil screening dan menemukan langkah dukungan yang sesuai.</p></article>
+        <article class="feature-card"><div class="feature-icon teal">♡</div><h3>Psikolog</h3><p>Hubungkan hasil screening dengan dukungan profesional ketika diperlukan.</p></article>
         <article class="feature-card"><div class="feature-icon orange">◎</div><h3>Aksesibel</h3><p>Ukuran teks, kontras, voice support, dan pilihan komunikasi dapat disesuaikan.</p></article>
         <article class="feature-card"><div class="feature-icon blue">▣</div><h3>Kontrol data</h3><p>Riwayat dan informasi pribadi tidak otomatis dibagikan kepada tim atau pelatih.</p></article>
       </div>
@@ -106,21 +106,28 @@
     </section>
 
     <section class="page" id="wellbeing">
-      <div class="page-title"><div><span class="eyebrow">WELL-BEING</span><h1>Kenali pola, bukan untuk menghakimi diri.</h1><p>Check-in sederhana ini membantu kamu melihat kondisi hari ini. Hasilnya bukan diagnosis.</p></div></div>
+      <div class="page-title"><div><span class="eyebrow">WELL-BEING SCREENING</span><h1>Check-in mental health berbasis PHQ-4.</h1><p>Screening singkat untuk membantu mengenali gejala kecemasan dan depresi. Hasilnya bukan diagnosis.</p></div><span class="status"><i></i> PHQ-4 • 4 item</span></div>
       <div class="wellbeing-grid">
         <div class="checkin-card">
           <div class="progress-line"><span id="stepLabel">Langkah 1 dari 4</span><span id="progressPct">25%</span></div>
           <div class="progress-bar"><i id="progressBar"></i></div>
-          <div id="checkinContent">
-            <span class="question-tag">MOOD</span><h2>Bagaimana suasana hatimu hari ini?</h2>
-            <div class="choice-grid" data-step="0">
-              <button data-value="1">😞 Sangat berat</button><button data-value="2">😕 Kurang baik</button><button data-value="3">🙂 Cukup baik</button><button data-value="4">😊 Baik</button><button data-value="5">✨ Sangat baik</button>
-            </div>
-          </div>
+          <div id="checkinContent"></div>
         </div>
-        <aside class="insight-card"><span class="eyebrow">CATATAN</span><h3>Well-being ≠ performa</h3><p>Kondisi mental bisa berubah dari hari ke hari. Check-in bukan alat untuk menilai apakah kamu “cukup kuat”, melainkan kesempatan untuk mengenali kebutuhanmu.</p><div class="insight-tip">💡 <b>Tips:</b> Jawab sesuai keadaanmu sekarang, bukan sesuai harapan orang lain.</div></aside>
+        <aside class="insight-card">
+          <span class="eyebrow">DASAR PENILAIAN</span>
+          <h3>PHQ-4 + indikator keselamatan</h3>
+          <p>PHQ-4 menggabungkan dua item gejala depresi dan dua item gejala kecemasan. SahabatCare menggunakan hasil screening sebagai dasar triage, bukan untuk menetapkan diagnosis.</p>
+          <div class="risk-guide">
+            <div><span class="risk-dot low"></span><b>Rendah</b><small>Monitoring dan psikoedukasi</small></div>
+            <div><span class="risk-dot medium"></span><b>Sedang</b><small>Perhatian dan dukungan profesional</small></div>
+            <div><span class="risk-dot high"></span><b>Tinggi</b><small>Eskalasi sesuai protokol keselamatan</small></div>
+          </div>
+        </aside>
       </div>
-      <div class="history-card"><div><span class="eyebrow">RIWAYAT</span><h2>Check-in terakhir</h2></div><div id="historyList" class="history-list"><p class="empty-state">Belum ada check-in tersimpan. Coba lakukan satu sekarang.</p></div></div>
+      <div class="history-card">
+        <div><span class="eyebrow">MONITORING BERKELANJUTAN</span><h2>Riwayat PHQ-4</h2></div>
+        <div id="historyList" class="history-list"><p class="empty-state">Belum ada screening tersimpan. Lakukan PHQ-4 untuk memulai monitoring.</p></div>
+      </div>
     </section>
 
     <section class="page" id="care">
